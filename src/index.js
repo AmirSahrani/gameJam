@@ -1,3 +1,5 @@
+import * as  player from './player.js'
+
 let windowWidth = 1000;
 let windowHeight = 800;
 
@@ -14,6 +16,7 @@ function setup() {
 
 function draw() {
    background("#D741A7");
+
    textSize(32);
    stroke("#3A1772");
    text(title, titleXpos, titleYpos);
@@ -29,3 +32,6 @@ function draw() {
    titleXpos += stepX;
    titleYpos += stepY;
 }
+// 👇 Make sure p5 can access these:
+window.setup = setup;
+window.draw = draw;
