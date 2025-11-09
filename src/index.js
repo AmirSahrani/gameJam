@@ -2,35 +2,53 @@ import * as  player from './player.js'
 
 let windowWidth = 1000;
 let windowHeight = 800;
+let player;
 
-let titleXpos = 100;
-let titleYpos = 100;
-let title = "Hello, World!";
-let stepX = 4;
-let stepY = -4;
+let Xspeed, Yspeed;
+
 
 function setup() {
    let canvas = createCanvas(windowWidth, windowHeight);
    canvas.parent('game-container'); // attach canvas to the div
+
+   player = [20, height/3*2, 30, 30]
+   Xspeed = 5; Yspeed = 2;
 }
 
 function draw() {
-   background("#D741A7");
+   background(255);
+   line(0, height/3*2+30, width, height/3*2+30);
+   rect(...player);
 
-   textSize(32);
-   stroke("#3A1772");
-   text(title, titleXpos, titleYpos);
+   if (keyIsDown(RIGHT_ARROW) === true){
+      playerMovesRight();
+   }
 
-   if (titleXpos > windowWidth - textWidth(title) ||
-      (titleXpos < 0)) {
-      stepX *= -1;
+   if (keyIsDown(LEFT_ARROW) === true){
+      playerMovesLeft();
    }
-   if (titleYpos > windowHeight ||
-      (titleYpos < 32)) {
-      stepY *= -1;
+   keyPressed();
+
+}
+
+function keyPressed(){
+   console.log(keyCode);
+  
+   if (keyCode === 38){
+      playerJumps();
    }
-   titleXpos += stepX;
-   titleYpos += stepY;
+}
+
+function playerMovesLeft(){
+   player[0] = player[0] - Xspeed;
+}
+
+function playerMovesRight(){
+   player[0] = player[0] + Xspeed;
+}
+
+function playerJumps(){
+   player[1] = player[1] + Yspeed^2 - 2*Yspeed;
 }
 // 👇 Make sure p5 can access these:
 window.setup = setup;
