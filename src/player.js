@@ -1,4 +1,5 @@
 let resistance = 0.9;
+let gravity = 0.9;
 
 export class Player {
     constructor(x, y){
@@ -16,6 +17,9 @@ export class Player {
         if (Math.abs(this.dx) < 1e-6)
             { this.dx = 0};
         this.x = this.x + this.dx;
+        
+        this.dy = (resistance * this.dy) + gravity;
+        this.y = Math.min(this.y + this.dy, 500);
 
     }
 }
@@ -41,7 +45,7 @@ function keyPressed(player){
    if (keyIsDown(LEFT_ARROW) === true){
       playerMovesLeft(player);
    }
-   if (keyCode === 38){
+   if (keyIsDown(38)){
       playerJumps(player);
    }
 }
@@ -55,5 +59,5 @@ function playerMovesRight(p){
 }
 
 function playerJumps(p){
-   p.dy = 10;
+   p.dy = -10;
 }
