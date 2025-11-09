@@ -1,37 +1,25 @@
-import * as  player from './player.js'
+import * as  pl from './player.js'
 
 let windowWidth = 1000;
 let windowHeight = 800;
 
-let titleXpos = 100;
-let titleYpos = 100;
-let title = "Hello, World!";
-let stepX = 4;
-let stepY = -4;
+let player = new pl.Player(20, windowHeight/3*2);
+
 
 function setup() {
    let canvas = createCanvas(windowWidth, windowHeight);
    canvas.parent('game-container'); // attach canvas to the div
+   
 }
 
 function draw() {
-   background("#D741A7");
+   background(255);
+   pl.handlePlayerMovement(player);
+   line(0, height/3*2+30, width, height/3*2+30);
+  
 
-   textSize(32);
-   stroke("#3A1772");
-   text(title, titleXpos, titleYpos);
-
-   if (titleXpos > windowWidth - textWidth(title) ||
-      (titleXpos < 0)) {
-      stepX *= -1;
-   }
-   if (titleYpos > windowHeight ||
-      (titleYpos < 32)) {
-      stepY *= -1;
-   }
-   titleXpos += stepX;
-   titleYpos += stepY;
 }
-// 👇 Make sure p5 can access these:
+
+// 👇 Make sure p5 can access these:   
 window.setup = setup;
 window.draw = draw;
